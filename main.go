@@ -33,6 +33,7 @@ func main() {
 			fmt.Print(err)
 			os.Exit(1)
 		}
+		defer conn.Close()
 		go handleConnection(conn)
 	}
 }
