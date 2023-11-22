@@ -5,7 +5,7 @@ WORKDIR /tmp/build
 COPY . .
 RUN go build -v -o tcp-listener ./...
 
-FROM build
+FROM scratch
 
 COPY --from=build /tmp/build/tcp-listener /usr/local/bin/tcp-listener
 
