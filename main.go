@@ -24,6 +24,7 @@ func main() {
 		fmt.Print(err)
 		os.Exit(1)
 	}
+	defer ln.Close()
 
 	fmt.Printf("Listening on port %d\n", port)
 
@@ -33,8 +34,10 @@ func main() {
 			fmt.Print(err)
 			os.Exit(1)
 		}
-		defer conn.Close()
-		go handleConnection(conn)
+		go func(c net.Conn) {
+			handleConnection(c)
+			c.Close()
+		}(conn)
 	}
 }
 
