@@ -43,4 +43,8 @@ func main() {
 
 func handleConnection(c net.Conn) {
 	fmt.Printf("Accepted connection from %s\n", c.RemoteAddr())
+	_, err := c.Write([]byte(fmt.Sprintf("Accepted connection from %s\n", c.RemoteAddr())))
+	if err != nil {
+		fmt.Printf("can't write to connection: %v", err)
+	}
 }
